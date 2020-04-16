@@ -37,9 +37,7 @@ public class Controller {
         {
             Vertex from = (Vertex) edge.getFromVertex();
             Vertex to = (Vertex) edge.getToVertex();
-            graphicsContext.moveTo(from.getX()+10, from.getY()+10);
-            graphicsContext.lineTo(to.getX()+10, to.getY()+10);
-            graphicsContext.stroke();
+            graphicsContext.strokeLine(from.getX()+10, from.getY()+10, to.getX()+10, to.getY()+10);
         }
     }
 
