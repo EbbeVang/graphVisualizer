@@ -8,12 +8,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import sample.graph.Edge;
 import sample.graph.Graph;
-
-import java.util.LinkedList;
-import java.util.zip.CheckedOutputStream;
 
 public class Controller {
 
@@ -23,17 +19,17 @@ public class Controller {
     public void initialize()
     {
         graphicsContext = canvas.getGraphicsContext2D();
-        listViewEdges.setItems(graph.edges);
-        listViewVertices.setItems(graph.vertices);
+        listViewEdges.setItems(graph.getEdges());
+        listViewVertices.setItems(graph.getVertices());
         
     }
 
     private void draw(GraphicsContext graphicsContext) {
         graphicsContext.clearRect(0,0, 500, 500);
-        for (Vertex vertex : graph.getVerticesAsLinkedList()) {
+        for (Vertex vertex : graph.getVertices()) {
             vertex.draw(graphicsContext);
         }
-        for (Edge edge: graph.getAllEdgesAsLinkedList())
+        for (Edge edge: graph.getEdges())
         {
             Vertex from = (Vertex) edge.getFromVertex();
             Vertex to = (Vertex) edge.getToVertex();
@@ -55,8 +51,8 @@ public class Controller {
 
     @FXML
     void ConnectVertices(ActionEvent event) {
-        for (Vertex vertexA: graph.getVerticesAsLinkedList()) {
-            for (Vertex vertexB: graph.getVerticesAsLinkedList()) {
+        for (Vertex vertexA: graph.getVertices()) {
+            for (Vertex vertexB: graph.getVertices()) {
                 if (vertexA.isSelected() && vertexB.isSelected() && !vertexA.equals(vertexB) && !graph.isAdjecentVertices(vertexA, vertexB)){
                     double edgeLength = Math.sqrt(Math.pow(vertexA.getX() - vertexB.getX(), 2) + Math.pow(vertexA.getY()- vertexB.getY(), 2));
                     graph.addEdge(vertexA, vertexB, (int)edgeLength);
@@ -71,8 +67,8 @@ public class Controller {
 
     @FXML
     void removeVertex(ActionEvent event) {
-        for (int i = 0; i < graph.vertices.size(); i++) {
-            if (graph.getVerticesAsLinkedList().get(i).isSelected()){
+        for (int i = 0; i < graph.getVertices().size(); i++) {
+            if (graph.getVertices().get(i).isSelected()){
                 graph.removeVertexByIndex(i);
             }
         }
@@ -91,9 +87,9 @@ public class Controller {
         else if (event.getButton() == MouseButton.SECONDARY)
         {
             //find closest Vertex and flip selected
-            Vertex closestVertex = graph.vertices.get(0);
+            Vertex closestVertex = graph.getVertices().get(0);
             double shortestDistance = Double.MAX_VALUE;
-            for (Vertex vertex: graph.getVerticesAsLinkedList()) {
+            for (Vertex vertex: graph.getVertices()) {
                 double xDist = Math.abs(vertex.getX() - event.getX());
                 double yDist = Math.abs(vertex.getY() - event.getY());
                 double dist = xDist + yDist;

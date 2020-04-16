@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <left>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label text="List of Vertices">
+               <VBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </VBox.margin></Label>
+            <ListView fx:id="listViewVertices">
+               <VBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </VBox.margin></ListView>
+            <Label text="List of Edges">
+               <VBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </VBox.margin></Label>
+            <ListView fx:id="listViewEdges">
+               <VBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </VBox.margin></ListView>
+         </children>
+      </VBox>
+   </left>
+   <bottom>
+      <FlowPane alignment="TOP_RIGHT" BorderPane.alignment="CENTER">
+         <children>
+             <Button mnemonicParsing="false" onAction="#ConnectVertices" text="Connect Selected Vertices">
+               <FlowPane.margin>
+                  <Insets bottom="2.0" right="2.0" top="2.0" />
+               </FlowPane.margin></Button>
+             <Button mnemonicParsing="false" onAction="#removeVertex" text="Remove Selected Vertex">
+               <FlowPane.margin>
+                  <Insets bottom="2.0" right="2.0" top="2.0" />
+               </FlowPane.margin></Button>
+         </children>
+      </FlowPane>
+   </bottom>
+   <center>
+      <Pane fx:id="paneCanvas">
+         <children>
+            <Canvas fx:id="canvas" height="450.0" onMouseClicked="#mouseClickedOnCanvas" width="550.0" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
