@@ -1,4 +1,9 @@
 package sample.graph;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -6,10 +11,13 @@ import java.util.LinkedList;
 public class Graph<T> implements Iterable<T>{
 	
 	//My vertices
-	LinkedList<T> vertices = new LinkedList<T>();
+	//LinkedList<T> vertices = new LinkedList<T>();
+	public ObservableList<T> vertices = FXCollections.observableArrayList();
 
 	//My Edges
-	LinkedList<Edge> edges = new LinkedList<Edge>();
+	//LinkedList<Edge> edges = new LinkedList<Edge>();
+	public ObservableList<Edge> edges = FXCollections.observableArrayList();
+
 
 	public void addVertex(T vertex){
 		vertices.add(vertex);
@@ -21,7 +29,12 @@ public class Graph<T> implements Iterable<T>{
 		}
 		return null;
 	}
-	
+
+	public void removeVertexByIndex(int i)
+	{
+		removeVertex(vertices.get(i));
+	}
+
 	public void removeVertex(T vertex){
 		LinkedList<Edge<T>> edgesToBeRemoved = new LinkedList<Edge<T>>();
 		
@@ -65,11 +78,11 @@ public class Graph<T> implements Iterable<T>{
 		return vertices.toString();
 	}
 		
-	public LinkedList<T> getVerticesAsLinkedList(){
+	public ObservableList<T> getVerticesAsLinkedList(){
 		return vertices;
 	}
 	
-	public LinkedList<Edge> getAllEdgesAsLinkedList() {
+	public ObservableList<Edge> getAllEdgesAsLinkedList() {
 		return edges;
 	}
 	
